@@ -1,0 +1,8 @@
+C:\Users\Frank\Documents\Visual Studio 2019\Projects\NEAT\NEATLibrary\obj\Debug\netstandard2.0\NEATLibrary.csprojAssemblyReference.cache
+C:\Users\Frank\Documents\Visual Studio 2019\Projects\NEAT\NEATLibrary\obj\Debug\netstandard2.0\NEATLibrary.AssemblyInfoInputs.cache
+C:\Users\Frank\Documents\Visual Studio 2019\Projects\NEAT\NEATLibrary\obj\Debug\netstandard2.0\NEATLibrary.AssemblyInfo.cs
+C:\Users\Frank\Documents\Visual Studio 2019\Projects\NEAT\NEATLibrary\bin\Debug\netstandard2.0\NEATLibrary.deps.json
+C:\Users\Frank\Documents\Visual Studio 2019\Projects\NEAT\NEATLibrary\bin\Debug\netstandard2.0\NEATLibrary.dll
+C:\Users\Frank\Documents\Visual Studio 2019\Projects\NEAT\NEATLibrary\bin\Debug\netstandard2.0\NEATLibrary.pdb
+C:\Users\Frank\Documents\Visual Studio 2019\Projects\NEAT\NEATLibrary\obj\Debug\netstandard2.0\NEATLibrary.dll
+C:\Users\Frank\Documents\Visual Studio 2019\Projects\NEAT\NEATLibrary\obj\Debug\netstandard2.0\NEATLibrary.pdb
