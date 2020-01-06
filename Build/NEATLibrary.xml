@@ -1,0 +1,603 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NEATLibrary</name>
+    </assembly>
+    <members>
+        <member name="F:nl.FvH.NEAT.Brain.Genes.ConnectionGene.Innovation">
+            <summary>
+            Innovation-Number for Gene
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genes.ConnectionGene.In">
+            <summary>
+            Starting (Input-)Gene for Connection
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genes.ConnectionGene.Out">
+            <summary>
+            Ending (Output-)Gene for Connection
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Brain.Genes.ConnectionGene.IsValid">
+            <summary>
+            Checks whether this ConnectionGene is Valid (Innovation != 0)
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Brain.Genes.ConnectionGene.Weight">
+            <summary>
+            Connection-Weight
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Brain.Genes.ConnectionGene.Expressed">
+            <summary>
+            Is the Connection Expressed (used)?
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.ConnectionGene.#ctor(nl.FvH.NEAT.Brain.Genes.NodeGene,nl.FvH.NEAT.Brain.Genes.NodeGene,System.Single,System.Boolean,System.UInt64)">
+            <summary>
+            Constructor for a ConnectionGene
+            </summary>
+            <param name="inNode"></param>
+            <param name="outNode"></param>
+            <param name="weight"></param>
+            <param name="expressed"></param>
+            <param name="innovation"></param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.ConnectionGene.Disable">
+            <summary>
+            Disables the Connection, meaning it is no longer Expressed
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.ConnectionGene.PerturbWeight(System.Single)">
+            <summary>
+            Perturbs Weight for Connection
+            </summary>
+            <param name="factor">Factor to perturb by</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.ConnectionGene.HasNode(nl.FvH.NEAT.Brain.Genes.NodeGene)">
+            <summary>
+            Checks whether a Node is part of this Connection (as either Input or Output) by Innovation-Number
+            </summary>
+            <param name="node">Node to Check for</param>
+            <returns>True if <c ref="In">In</c> or <c ref="Out">Out</c> have an Equal Innovation-Number to <paramref name="node"/></returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.ConnectionGene.CompareTo(nl.FvH.NEAT.Brain.Genes.ConnectionGene)">
+            <summary>
+            Compares ConnectionGenes by Innovation-Number
+            </summary>
+            <param name="other">ConnectionGene to Compare against</param>
+            <returns>CompareTo of Innovation-Numbers</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.ConnectionGene.Equals(nl.FvH.NEAT.Brain.Genes.ConnectionGene)">
+            <summary>
+            Compares ConnectionGenes by Innovation-Number
+            </summary>
+            <param name="other">ConnectionGene to Compare against</param>
+            <returns>True if Innovation-Numbers are equal</returns>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genes.NodeGene.Innovation">
+            <summary>
+            Innovation-Number for Gene
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genes.NodeGene.Type">
+            <summary>
+            Type for NodeGene (Layer-Type)
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Brain.Genes.NodeGene.IsValid">
+            <summary>
+            Checks whether this NodeGene is Valid (Innovation != 0)
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Brain.Genes.NodeGene.State">
+            <summary>
+            Current State (Output-Value) of the Node
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.NodeGene.#ctor(nl.FvH.NEAT.Enums.NodeType,System.UInt64)">
+            <summary>
+            Constructor for a NodeGene
+            </summary>
+            <param name="type">NodeType for Gene</param>
+            <param name="innovation">Innovation-Number for Gene. Leave 0 to Auto-Generate</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.NodeGene.SetState(System.Double)">
+            <summary>
+            Sets State (Output-Value) for Node
+            </summary>
+            <param name="state">Value to Set</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.NodeGene.CompareTo(nl.FvH.NEAT.Brain.Genes.NodeGene)">
+            <summary>
+            Compares NodeGenes by Innovation-Number
+            </summary>
+            <param name="other">NodeGene to Compare against</param>
+            <returns>CompareTo of Innovation-Numbers</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genes.NodeGene.Equals(nl.FvH.NEAT.Brain.Genes.NodeGene)">
+            <summary>
+            Compares NodeGenes by Innovation-Number
+            </summary>
+            <param name="other">NodeGene to Compare against</param>
+            <returns>True if Innovation-Numbers are equal</returns>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genome.MaxFindAttempts">
+            <summary>
+            Max amount of attempts at finding nodes/connections during Mutation
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Brain.Genome.NumGenes">
+            <summary>
+            Number of ConnectionGenes in Genome
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Brain.Genome.Fitness">
+            <summary>
+            Fitness for Genome
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genome.Connections">
+            <summary>
+            ConnectionGenes in Genome (by Innovation-Number)
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genome.Nodes">
+            <summary>
+            NodeGenes in Genome (by Innovation-Number)
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genome.fitness">
+            <summary>
+            Fitness for Genome
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genome.nodesInOrder">
+            <summary>
+            Ordered List of NodeGene-Innovation-Numbers
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genome.inputConnectionsPerNode">
+            <summary>
+            Connections for each Node (Connections where Node is Output)
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Brain.Genome.outputCache">
+            <summary>
+            Cached Array for Outputs (to re-use memory)
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:nl.FvH.NEAT.Brain.Genome.#ctor(System.Collections.Generic.List{nl.FvH.NEAT.Brain.Genes.NodeGene},System.Collections.Generic.List{nl.FvH.NEAT.Brain.Genes.ConnectionGene})" -->
+        <member name="M:nl.FvH.NEAT.Brain.Genome.#ctor">
+            <summary>
+            Constructor for an Empty Genome (used to create Child-Genome during Breeding)
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.Calculate(System.Double[])">
+            <summary>
+            Calculates Output for Genome
+            </summary>
+            <param name="input">Input for Genome</param>
+            <returns>Output-Values for Genome</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.SetUpNetwork">
+            <summary>
+            Sets up variables used during Calculation of Output (to speed up calculation)
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.SetFitness(System.Single)">
+            <summary>
+            Sets Fitness for Genome
+            </summary>
+            <param name="fit">Fitness to set</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.Mutate">
+            <summary>
+            Mutates this Genome
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.MutateAddRandomConnection">
+            <summary>
+            Adds random connection (Structural Mutation) to Genome
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.MutateAddConnection(System.UInt64,System.UInt64)">
+            <summary>
+            Adds Connection (Structural Mutation) to Genome from Nodes
+            </summary>
+            <param name="nodeFrom">From-Node (Innovation-Number) for Connection</param>
+            <param name="nodeTo">To-Node (Innovation-Number) for Connection</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.MutateAddConnection(nl.FvH.NEAT.Brain.Genes.NodeGene,nl.FvH.NEAT.Brain.Genes.NodeGene)">
+            <summary>
+            Adds Connection (Structural Mutation) to Genome from Nodes
+            </summary>
+            <param name="nodeFrom">From-Node for Connection</param>
+            <param name="nodeTo">To-Node for Connection</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.AddConnection(nl.FvH.NEAT.Brain.Genes.ConnectionGene)">
+            <summary>
+            Adds a ConnectionGene to this Genome. Overwrites if ConnectionGene with Innovation-Number exists
+            </summary>
+            <param name="gene">ConnectionGene to add</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.MutateAddRandomNode">
+            <summary>
+            Adds Node for Random Connection in Genome (Structural Mutation)
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.MutateAddNode(nl.FvH.NEAT.Brain.Genes.ConnectionGene)">
+            <summary>
+            Adds Node for Connection (Structural Mutation)
+            </summary>
+            <param name="connectionInnovation">Connection to add Node for</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.MutateAddNode(System.UInt64)">
+            <summary>
+            Adds Node for Connection (Structural Mutation) by Connection-InnovationNumber
+            </summary>
+            <param name="connectionInnovation">Innovation-Number for Connection</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.AddNode(nl.FvH.NEAT.Brain.Genes.NodeGene)">
+            <summary>
+            Adds a NodeGene to this Genome. Overwrites if NodeGene with Innovation-Number exists
+            </summary>
+            <param name="gene">NodeGene to add</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.PerturbRandomConnections">
+            <summary>
+            Randomly perturbs 50% of the Connection-Weights in this Genome
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Brain.Genome.Breed(nl.FvH.NEAT.Brain.Genome,nl.FvH.NEAT.Brain.Genome)">
+            <summary>
+            Breeds 2 Genomes to create a Child
+            </summary>
+            <param name="parent1">Parent 1 for Breeding</param>
+            <param name="parent2">Parent 2 for Breeding</param>
+            <returns>Child Genome</returns>
+        </member>
+        <member name="F:nl.FvH.NEAT.Enums.NodeType.INPUT">
+            <summary>
+            Input Node
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Enums.NodeType.HIDDEN">
+            <summary>
+            Hidden Node
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Enums.NodeType.OUTPUT">
+            <summary>
+            Output Node
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Factories.InnovationFactory.MaxConnection">
+            <summary>
+            (Current) Highest Innovation-Number for ConnectionGenes
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Factories.InnovationFactory.MaxNode">
+            <summary>
+            (Current) Highest Innovation-Number for NodeGenes
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Factories.InnovationFactory.GetConnectionInnovation">
+            <summary>
+            Gets an Innovation-Number for a new ConnectionGene
+            </summary>
+            <returns>New Highest Innovation-Number for ConnectionGenes</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Factories.InnovationFactory.GetNodeInnovation">
+            <summary>
+            Gets an Innovation-Number for a new NodeGene
+            </summary>
+            <returns>New Highest Innovation-Number for NodeGenes</returns>
+        </member>
+        <member name="T:nl.FvH.NEAT.Factories.MutationFactory">
+            <summary>
+            A MutationFactory is used to ensure that when the same Mutation is created twice during a single Generation, these Mutations have the same Innovation-Number
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Factories.MutationFactory.generationConnections">
+            <summary>
+            ConnectionGenes created this Generation
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.Factories.MutationFactory.generationNodes">
+            <summary>
+            NodeGenes created this Generation
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:nl.FvH.NEAT.Factories.MutationFactory.GetConnection(nl.FvH.NEAT.Brain.Genes.NodeGene,nl.FvH.NEAT.Brain.Genes.NodeGene)" -->
+        <member name="M:nl.FvH.NEAT.Factories.MutationFactory.GetNode(nl.FvH.NEAT.Brain.Genes.ConnectionGene@,nl.FvH.NEAT.Brain.Genes.ConnectionGene@,nl.FvH.NEAT.Brain.Genes.ConnectionGene@)">
+            <summary>
+            Gets a (new) NodeGene for this Generation from existing ConnectionGene
+            </summary>
+            <param name="connectionOld">Connection to create Node for. Passed by reference in order to disable it</param>
+            <param name="connectionNew1">OUT: New Connection from old In-Node to new Node</param>
+            <param name="connectionNew2">OUT: New Connection from new Node to old Out-Node</param>
+            <returns>Created NodeGene</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:nl.FvH.NEAT.Factories.MutationFactory.EndGeneration" -->
+        <member name="P:nl.FvH.NEAT.Generation.Species.Count">
+            <summary>
+            Amount of Genomes in Species
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Generation.Species.Mascot">
+            <summary>
+            Mascot for Species
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Generation.Species.Genomes">
+            <summary>
+            ReadOnly-List of Genomes in Species
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.Generation.Species.Item(System.Int32)">
+            <summary>
+            Indexer for Genomes in this Species
+            </summary>
+            <param name="index">Index in Genome-List</param>
+            <returns>Genome in Species for Index</returns>
+        </member>
+        <member name="F:nl.FvH.NEAT.Generation.Species.genomes">
+            <summary>
+            Genomes in Species
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Generation.Species.#ctor(nl.FvH.NEAT.Brain.Genome)">
+            <summary>
+            Creates a Species with a Mascot
+            </summary>
+            <param name="mascot">Mascot for Species</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Generation.Species.GetAvgFitness">
+            <summary>
+            Gets Fitness for Species (Avg of Genomes)
+            </summary>
+            <returns>Average Fitness of Genomes in Species</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Generation.Species.GetFitness">
+            <summary>
+            Gets Fitness for Species (Sum of Genomes)
+            </summary>
+            <returns>Sum of Fitness for Genomes in Species</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Generation.Species.AddGenome(nl.FvH.NEAT.Brain.Genome)">
+            <summary>
+            Adds a Genome to this Species (if it is not in the species yet)
+            </summary>
+            <param name="genome">Genome to Add</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Generation.Species.Clear">
+            <summary>
+            Clears Genomes, but attempts to set new Mascot first 
+            (to ensure an up-to-date Mascot from only 1 generation ago)
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Generation.Species.KillOffPercentage(System.Single)">
+            <summary>
+            Kills off percentage of genomes before breeding
+            </summary>
+            <param name="live">Percentage that lives (0-100)</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Generation.Species.BreedPopulation(System.Int32,System.Single)">
+            <summary>
+            Breeds new population within species
+            </summary>
+            <param name="popSize">Size for new population</param>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.PopulationSize">
+            <summary>
+            Size of Population (Number of Genomes)
+            </summary>
+        </member>
+        <member name="P:nl.FvH.NEAT.NEATController.Population">
+            <summary>
+            Current Population of Genomes
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.inputNodes">
+            <summary>
+            Number of Input-Nodes per Genome
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.outputNodes">
+            <summary>
+            Number of Output-Nodes per Genome
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.breedingPercentage">
+            <summary>
+            Percentage of Genomes within each species that are allowed to breed
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.compatibilityThreshold">
+            <summary>
+            Threshold for Compatibility between Genomes
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.mutationChance">
+            <summary>
+            Chance for Mutation (Percentage) of each Genome when Breeding
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.c1">
+            <summary>
+            Constant used for calculating CompatibilityDistance
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.c2">
+            <summary>
+            Constant used for calculating CompatibilityDistance
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.c3">
+            <summary>
+            Constant used for calculating CompatibilityDistance
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.population">
+            <summary>
+            Current Population of Genomes
+            </summary>
+        </member>
+        <member name="F:nl.FvH.NEAT.NEATController.species">
+            <summary>
+            Species of Genomes (for 'previous' generation)
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.NEATController.#ctor(System.UInt32,System.UInt32,System.UInt32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Constructor for a NEATController
+            </summary>
+            <param name="popSize">Size of Population (Number of Genomes in a Generation)</param>
+            <param name="numInputs">Number of Input-Nodes per Genome</param>
+            <param name="numOutputs">Number of Output-Nodes per Genome</param>
+            <param name="mutation">Chance (0-100) for Mutation of each Genome when Breeding</param>
+            <param name="breed">Percentage (0-100) of Genomes within each species that are allowed to breed</param>
+            <param name="compThresh">Threshold for Compatibility between Genomes</param>
+            <param name="c1">Constant used for calculating CompatibilityDistance</param>
+            <param name="c2">Constant used for calculating CompatibilityDistance</param>
+            <param name="c3">Constant used for calculating CompatibilityDistance</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.NEATController.BreedNewPopulation">
+            <summary>
+            Breeds a Population of Genomes
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.NEATController.CreateInitialPopulation">
+            <summary>
+            Creates initial Genome-Population
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.NEATController.Speciate">
+            <summary>
+            Pushes Genomes into Species based on Compatibility-Distance
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Activations.Sigmoid(System.Double)">
+            <summary>
+            Standard Sigmoid Logistic Function
+            <para>
+            S(x) = exp(x) / (exp(x) + 1)
+            </para>
+            <para>
+            https://en.wikipedia.org/wiki/Sigmoid_function
+            </para>
+            </summary>
+            <param name="value">Input for Function</param>
+            <returns>Output from Function</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Activations.Step(System.Double)">
+            <summary>
+            Binary Cut-Off
+            <para>
+            G(x) = x >= 0 ? 1 : 0
+            </para>
+            </summary>
+            <param name="value">Input for Function</param>
+            <returns>Output from Function</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Activations.TanH(System.Double)">
+            <summary>
+            Tan-H
+            </summary>
+            <param name="value">Input for Function</param>
+            <returns>Output from Function</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Activations.ReLu(System.Double)">
+            <summary>
+            Rectified Linear Unit
+            R(x) = Max(0, x)
+            </summary>
+            <param name="value">Input for Function</param>
+            <returns>Output from Function</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:nl.FvH.NEAT.Util.Activations.LeakyReLu(System.Double)" -->
+        <member name="M:nl.FvH.NEAT.Util.Activations.ArcTan(System.Double)">
+            <summary>
+            ArcTan
+            A(x) = ATan(x)
+            </summary>
+            <param name="value">Input for Function</param>
+            <returns>Output from Function</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Activations.SoftSign(System.Double)">
+            <summary>
+            SoftSign
+            S(x) = x / (1 + |x|)
+            </summary>
+            <param name="value">Input for Function</param>
+            <returns>Output from Function</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Activations.Sinusoid(System.Double)">
+            <summary>
+            Sinusoid
+            S(x) = Sin(x)
+            </summary>
+            <param name="value">Input for Function</param>
+            <returns>Output from Function</returns>
+        </member>
+        <member name="F:nl.FvH.NEAT.Util.Functions.r">
+            <summary>
+            Random Number Generator used in functions
+            </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Functions.GetRandomNumber(System.Single,System.Single)">
+            <summary>
+            Gets a Random Number (Using System.Random)
+            </summary>
+            <param name="minimum">INCLUSIVE</param>
+            <param name="maximum">EXCLUSIVE</param>
+            <returns>Random number between minimum and maximum</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Functions.GetRandomNumber(System.Int32,System.Int32)">
+            <summary>
+            Gets a Random Number (Using System.Random)
+            </summary>
+            <param name="minimum">INCLUSIVE</param>
+            <param name="maximum">EXCLUSIVE</param>
+            <returns>Random number between minimum and maximum</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Functions.GetRandomElement``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Returns a random element from a list (or a default value if the list has no elements)
+            </summary>
+            <typeparam name="T">Type of elements in list</typeparam>
+            <param name="list">List to get element from</param>
+            <returns>Random element from list (or default value if the list has no elements)</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Functions.FisherYatesShuffle``1(System.Collections.Generic.IList{``0})">
+            <summary>
+            Shuffles Elements in a List using Fisher-Yates Shuffle
+            </summary>
+            <typeparam name="T">Type of Element in List</typeparam>
+            <param name="list">List to Shuffle</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Functions.GenomeHasConnection(nl.FvH.NEAT.Brain.Genome,nl.FvH.NEAT.Brain.Genes.NodeGene,nl.FvH.NEAT.Brain.Genes.NodeGene)">
+            <summary>
+            Checks whether a Genome has a Connection for a set of Nodes
+            </summary>
+            <param name="genome">Genome to check</param>
+            <param name="inputNode">InputNode for Connection</param>
+            <param name="outputNode">OutputNode for Connection</param>
+            <returns>True if Connection Exists</returns>
+        </member>
+        <member name="M:nl.FvH.NEAT.Util.Functions.CompatibilityDistance(nl.FvH.NEAT.Brain.Genome,nl.FvH.NEAT.Brain.Genome,System.Single,System.Single,System.Single)">
+            <summary>
+            Calculates Compatibility-Distance between two Genomes
+            </summary>
+            <param name="g1">Genome 1</param>
+            <param name="g2">Genome 2</param>
+            <param name="c1">Constant 1</param>
+            <param name="c2">Constant 2</param>
+            <param name="c3">Constant 3</param>
+            <returns>Compatibility-Distance between two Genomes</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:nl.FvH.NEAT.Util.Functions.GetExcessDisjoint(System.Collections.Generic.List{System.UInt64},nl.FvH.NEAT.Brain.Genome)" -->
+    </members>
+</doc>

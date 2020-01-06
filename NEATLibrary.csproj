@@ -5,4 +5,9 @@
     <RootNamespace>nl.FvH.NEAT</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>C:\Users\Frank\Documents\Git\NEAT\Build\NEATLibrary.xml</DocumentationFile>
+    <OutputPath>Build\</OutputPath>
+  </PropertyGroup>
+
 </Project>
