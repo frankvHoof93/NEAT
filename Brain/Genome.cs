@@ -42,6 +42,18 @@ namespace nl.FvH.NEAT.Brain
         /// Fitness for Genome
         /// </summary>
         private float? fitness;
+        /// <summary>
+        /// Ordered List of NodeGene-Innovation-Numbers
+        /// </summary>
+        private List<ulong> nodesInOrder = new List<ulong>();
+        /// <summary>
+        /// Connections for each Node (Connections where Node is Output)
+        /// </summary>
+        private readonly Dictionary<NodeGene, List<ConnectionGene>> inputConnectionsPerNode = new Dictionary<NodeGene, List<ConnectionGene>>();
+        /// <summary>
+        /// Cached Array for Outputs (to re-use memory)
+        /// </summary>
+        private double[] outputCache;
         #endregion
         #endregion
 
@@ -69,6 +81,64 @@ namespace nl.FvH.NEAT.Brain
         /// Constructor for an Empty Genome (used to create Child-Genome during Breeding)
         /// </summary>
         private Genome() { }
+        #endregion
+
+        #region Calculation
+        /// <summary>
+        /// Calculates Output for Genome
+        /// </summary>
+        /// <param name="input">Input for Genome</param>
+        /// <returns>Output-Values for Genome</returns>
+        public double[] Calculate(double[] input)
+        {
+            int output = 0;
+            if (inputConnectionsPerNode.Count == 0)
+                SetUpNetwork();
+            for (int i = 0; i < nodesInOrder.Count; i++)
+            {
+                NodeGene gene = Nodes[nodesInOrder[i]];
+                if (gene.Type == NodeType.INPUT) // Input-Nodes are always at the start, as they have the lowest Innovation-Number
+                    gene.SetState(input[i]);
+                else
+                {
+                    List<ConnectionGene> inputs = inputConnectionsPerNode[gene];
+                    double N = 0;
+                    for (int j = 0; j < inputs.Count; j++)
+                    {
+                        ConnectionGene conn = inputs[j];
+                        NodeGene inNode = Nodes[conn.In.Innovation]; // Grab Node from Nodes to get proper State (We're using Structs)
+                        N += conn.Weight * inNode.State;
+                    }
+                    gene.SetState(Activations.Sigmoid(N));
+                    if (gene.Type == NodeType.OUTPUT)
+                        outputCache[output] = gene.State;
+                }
+            }
+            return outputCache;
+        }
+        /// <summary>
+        /// Sets up variables used during Calculation of Output (to speed up calculation)
+        /// </summary>
+        private void SetUpNetwork()
+        {
+            int numOutputs = 0;
+            nodesInOrder = Nodes.Keys.ToList();
+            nodesInOrder.Sort();
+            for (int i = 0; i < nodesInOrder.Count; i++)
+                if (Nodes[nodesInOrder[i]].Type == NodeType.OUTPUT)
+                    numOutputs++;
+            outputCache = new double[numOutputs];
+            foreach (ConnectionGene connection in Connections.Values)
+            {
+                NodeGene node = connection.Out;
+                if (!connection.Expressed)
+                    continue;
+                if (inputConnectionsPerNode.ContainsKey(node))
+                    inputConnectionsPerNode[node].Add(connection);
+                else
+                    inputConnectionsPerNode.Add(node, new List<ConnectionGene> { connection });
+            }
+        }
         #endregion
 
         #region Fitness

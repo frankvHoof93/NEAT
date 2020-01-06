@@ -19,6 +19,10 @@ namespace nl.FvH.NEAT.Brain.Genes
         /// Checks whether this NodeGene is Valid (Innovation != 0)
         /// </summary>
         public bool IsValid => Innovation != 0;
+        /// <summary>
+        /// Current State (Output-Value) of the Node
+        /// </summary>
+        internal double State { get; private set; }
         #endregion
 
         #region Methods
@@ -31,6 +35,16 @@ namespace nl.FvH.NEAT.Brain.Genes
         {
             Type = type;
             Innovation = innovation == 0 ? InnovationFactory.GetNodeInnovation() : innovation;
+            State = 0;
+        }
+
+        /// <summary>
+        /// Sets State (Output-Value) for Node
+        /// </summary>
+        /// <param name="state">Value to Set</param>
+        internal void SetState(double state)
+        {
+            State = state;
         }
 
         /// <summary>
