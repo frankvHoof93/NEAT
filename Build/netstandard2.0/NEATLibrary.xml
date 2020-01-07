@@ -390,7 +390,7 @@
             </summary>
             <param name="popSize">Size for new population</param>
         </member>
-        <member name="F:nl.FvH.NEAT.NEATController.PopulationSize">
+        <member name="P:nl.FvH.NEAT.NEATController.PopulationSize">
             <summary>
             Size of Population (Number of Genomes)
             </summary>
@@ -468,6 +468,34 @@
             <summary>
             Breeds a Population of Genomes
             </summary>
+        </member>
+        <member name="M:nl.FvH.NEAT.NEATController.SetPopulationSize(System.UInt32,System.Boolean)">
+            <summary>
+            Sets new PopulationSize
+            </summary>
+            <param name="newSize">Size to set (> 0)</param>
+            <param name="breedNewPopulation">Whether to breed a new population with new size</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.NEATController.SetBreedingPercentage(System.Single)">
+            <summary>
+            Sets percentage of Population allowed to Breed
+            </summary>
+            <param name="newPercentage">Percentage to set (0-100)</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.NEATController.SetCompatibility(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets variables for calculating compatibility
+            </summary>
+            <param name="threshold">Threshold for Compatibility</param>
+            <param name="c1">Constant for calculating compatibility</param>
+            <param name="c2">Constant for calculating compatibility</param>
+            <param name="c3">Constant for calculating compatibility</param>
+        </member>
+        <member name="M:nl.FvH.NEAT.NEATController.SetMutationChance(System.Single)">
+            <summary>
+            Sets mutation-chance used after breeding
+            </summary>
+            <param name="mutate">Percentage-chance for mutation (0-100)</param>
         </member>
         <member name="M:nl.FvH.NEAT.NEATController.CreateInitialPopulation">
             <summary>

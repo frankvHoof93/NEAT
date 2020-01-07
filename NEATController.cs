@@ -16,7 +16,7 @@ namespace nl.FvH.NEAT
         /// <summary>
         /// Size of Population (Number of Genomes)
         /// </summary>
-        public readonly uint PopulationSize;
+        public uint PopulationSize { get; private set; }
         /// <summary>
         /// Current Population of Genomes
         /// </summary>
@@ -38,19 +38,19 @@ namespace nl.FvH.NEAT
         /// <summary>
         /// Percentage of Genomes within each species that are allowed to breed
         /// </summary>
-        private readonly float breedingPercentage;
+        private float breedingPercentage;
         /// <summary>
         /// Threshold for Compatibility between Genomes
         /// </summary>
-        private readonly float compatibilityThreshold;
+        private float compatibilityThreshold;
         /// <summary>
         /// Chance for Mutation (Percentage) of each Genome when Breeding
         /// </summary>
-        private readonly float mutationChance;
+        private float mutationChance;
         /// <summary>
         /// Constant used for calculating CompatibilityDistance
         /// </summary>
-        private readonly float c1, c2, c3;
+        private float c1, c2, c3;
         #endregion
 
         #region Population
@@ -138,6 +138,56 @@ namespace nl.FvH.NEAT
                 population.Remove(Functions.GetRandomElement(population)); // Darwin Sniper
             MutationFactory.EndGeneration();
         }
+
+        #region SetVariables
+        /// <summary>
+        /// Sets new PopulationSize
+        /// </summary>
+        /// <param name="newSize">Size to set (> 0)</param>
+        /// <param name="breedNewPopulation">Whether to breed a new population with new size</param>
+        public void SetPopulationSize(uint newSize, bool breedNewPopulation = false)
+        {
+            if (newSize == 0)
+                throw new ArgumentNullException("newSize", "PopulationSize cannot be 0");
+            PopulationSize = newSize;
+            if (breedNewPopulation)
+                BreedNewPopulation();
+        }
+        /// <summary>
+        /// Sets percentage of Population allowed to Breed
+        /// </summary>
+        /// <param name="newPercentage">Percentage to set (0-100)</param>
+        public void SetBreedingPercentage(float newPercentage)
+        {
+            if (newPercentage < 0 || newPercentage > 100)
+                throw new ArgumentOutOfRangeException("newPercentage", "Breeding-Amount must be between 0 and 100 percent");
+            breedingPercentage = newPercentage;
+        }
+        /// <summary>
+        /// Sets variables for calculating compatibility
+        /// </summary>
+        /// <param name="threshold">Threshold for Compatibility</param>
+        /// <param name="c1">Constant for calculating compatibility</param>
+        /// <param name="c2">Constant for calculating compatibility</param>
+        /// <param name="c3">Constant for calculating compatibility</param>
+        public void SetCompatibility(float threshold, float c1, float c2, float c3)
+        {
+            compatibilityThreshold = threshold;
+            this.c1 = c1;
+            this.c2 = c2;
+            this.c3 = c3;
+        }
+        /// <summary>
+        /// Sets mutation-chance used after breeding
+        /// </summary>
+        /// <param name="mutate">Percentage-chance for mutation (0-100)</param>
+        public void SetMutationChance(float mutate)
+        {
+            if (mutate < 0 || mutate > 100)
+                throw new ArgumentOutOfRangeException("mutation", "Mutation-Chance must be between 0 and 100 percent");
+            mutationChance = mutate;
+        }
+        #endregion
         #endregion
 
         #region Private
