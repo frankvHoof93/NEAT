@@ -6,6 +6,7 @@ using nl.FvH.NEAT.Generation;
 using nl.FvH.NEAT.Util;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace nl.FvH.NEAT
 {
@@ -116,6 +117,7 @@ namespace nl.FvH.NEAT
             }
             if (species.Count == 0) // No Species from previous Generation
                 Functions.FisherYatesShuffle(population); // Shuffle Previous Generation (so that initial Species-Mascots are randomized)
+            Speciate();
             // Clear old population to make room for new population (references exist through species)
             population.Clear();
             // Create new Population
@@ -212,10 +214,11 @@ namespace nl.FvH.NEAT
             {
                 NodeGene inputNode = input[i];
                 for (int j = 0; j < output.Count; j++)
-                    connections.Add(new ConnectionGene(inputNode, output[i], Functions.GetRandomNumber(-1f, 1f + float.Epsilon)));
+                    connections.Add(new ConnectionGene(inputNode, output[j], Functions.GetRandomNumber(-1f, 1f + float.Epsilon)));
             }
             // Add Output-Nodes to Input-List to create a single list of NodeGenes
             input.AddRange(output);
+            Debug.Log("Creating Population");
             // Create Genomes
             for (int i = 0; i < PopulationSize; i++)
             {

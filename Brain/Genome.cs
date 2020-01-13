@@ -5,6 +5,8 @@ using nl.FvH.NEAT.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace nl.FvH.NEAT.Brain
 {
@@ -15,7 +17,7 @@ namespace nl.FvH.NEAT.Brain
         /// <summary>
         /// Max amount of attempts at finding nodes/connections during Mutation
         /// </summary>
-        private const uint MaxFindAttempts = 20;
+        private const uint MaxFindAttempts = 5;
         #endregion
 
         #region Public
@@ -92,8 +94,11 @@ namespace nl.FvH.NEAT.Brain
         public double[] Calculate(double[] input)
         {
             int output = 0;
+            Profiler.BeginSample("Set up Network");
             if (inputConnectionsPerNode.Count == 0)
                 SetUpNetwork();
+            Profiler.EndSample();
+            Profiler.BeginSample("CalcNodes");
             for (int i = 0; i < nodesInOrder.Count; i++)
             {
                 NodeGene gene = Nodes[nodesInOrder[i]];
@@ -103,17 +108,20 @@ namespace nl.FvH.NEAT.Brain
                 {
                     List<ConnectionGene> inputs = inputConnectionsPerNode[gene];
                     double N = 0;
+                    Profiler.BeginSample("HiddenNode");
                     for (int j = 0; j < inputs.Count; j++)
                     {
                         ConnectionGene conn = inputs[j];
                         NodeGene inNode = Nodes[conn.In.Innovation]; // Grab Node from Nodes to get proper State (We're using Structs)
                         N += conn.Weight * inNode.State;
                     }
+                    Profiler.EndSample();
                     gene.SetState(Activations.Sigmoid(N));
                     if (gene.Type == NodeType.OUTPUT)
                         outputCache[output] = gene.State;
                 }
             }
+            Profiler.EndSample();
             return outputCache;
         }
         /// <summary>
@@ -216,18 +224,17 @@ namespace nl.FvH.NEAT.Brain
             inputNodes.AddRange(hiddenNodes);
             outputNodes.AddRange(hiddenNodes);
 
-
-
-
             // Find 2 nodes in these 2 lists which are NOT connected
             NodeGene inputNode = inputNodes[Functions.GetRandomNumber(0, inputNodes.Count)]; // Pick random inputNode
             int attempts = 0;
             while (attempts < MaxFindAttempts) // TODO: Improve this
             {
                 attempts++;
-                NodeGene outputNode = outputNodes[Functions.GetRandomNumber(0, inputNodes.Count)];
+                NodeGene outputNode = outputNodes[Functions.GetRandomNumber(0, outputNodes.Count)];
                 if (inputNode.Equals(outputNode)) // Same (hidden) node, can't connect to self
+                {
                     continue;
+                }
                 bool foundConnection = false;
                 foreach (ConnectionGene conn in Connections.Values)
                     if (conn.HasNode(inputNode) && conn.HasNode(outputNode))

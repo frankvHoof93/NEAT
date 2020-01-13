@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Frank\\Documents\\Visual Studio 2019\\Projects\\NEAT\\NEATLibrary\\NEATLibrary.csproj": {}
+    "C:\\Users\\Frank\\Documents\\Git\\NEAT\\NEATLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Frank\\Documents\\Visual Studio 2019\\Projects\\NEAT\\NEATLibrary\\NEATLibrary.csproj": {
+    "C:\\Users\\Frank\\Documents\\Git\\NEAT\\NEATLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Frank\\Documents\\Visual Studio 2019\\Projects\\NEAT\\NEATLibrary\\NEATLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\Frank\\Documents\\Git\\NEAT\\NEATLibrary.csproj",
         "projectName": "NEATLibrary",
-        "projectPath": "C:\\Users\\Frank\\Documents\\Visual Studio 2019\\Projects\\NEAT\\NEATLibrary\\NEATLibrary.csproj",
+        "projectPath": "C:\\Users\\Frank\\Documents\\Git\\NEAT\\NEATLibrary.csproj",
         "packagesPath": "C:\\Users\\Frank\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Frank\\Documents\\Visual Studio 2019\\Projects\\NEAT\\NEATLibrary\\obj\\",
+        "outputPath": "C:\\Users\\Frank\\Documents\\Git\\NEAT\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Frank\\AppData\\Roaming\\NuGet\\NuGet.Config",
